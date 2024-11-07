@@ -5,6 +5,7 @@ import Link from "next/link";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { Code2, Menu, X } from "lucide-react";
+import Image from "next/image";
 
 export function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -29,7 +30,7 @@ export function Navbar() {
     <nav
       className={cn(
         "fixed top-0 w-full z-50 transition-all duration-300",
-        isScrolled
+        isScrolled || isMobileMenuOpen
           ? "bg-white/80 backdrop-blur-md shadow-sm dark:bg-gray-950/80"
           : "bg-transparent"
       )}
@@ -38,7 +39,15 @@ export function Navbar() {
         <div className="flex items-center justify-between h-16">
           <div className="flex items-center">
             <Link href="/" className="flex items-center space-x-2">
-              <Code2 className="h-8 w-8 text-blue-600" />
+              {/* <Code2 className="h-8 w-8 text-blue-600" /> */}
+              <Image
+                src={"/mcideaswork-logo.svg"}
+                alt="logo"
+                width={0}
+                height={0}
+                className="w-[32px] h-auto block"
+                priority
+              />
               <span className="font-bold text-xl">McIdeas Work</span>
             </Link>
           </div>
@@ -54,7 +63,6 @@ export function Navbar() {
                 {link.label}
               </Link>
             ))}
-            <Button>Get Started</Button>
           </div>
 
           {/* Mobile Menu Button */}
@@ -86,9 +94,6 @@ export function Navbar() {
                 {link.label}
               </Link>
             ))}
-            <div className="px-4 pt-2">
-              <Button className="w-full">Get Started</Button>
-            </div>
           </div>
         )}
       </div>
